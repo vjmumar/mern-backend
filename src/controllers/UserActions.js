@@ -9,7 +9,8 @@ belongsTo: req.body.userId,
 likes: []
 }
 }
-}
+},
+{new: true}
 );
 
 res.json({
@@ -28,7 +29,7 @@ const DELETE_POST = async (req,res) => {
 try {
 const deletePost = await USER.findByIdAndUpdate(req.body.id, {
 $pull: {"Post": {"_id": req.body.postId }}
-});
+},{new: true});
 
 res.json({
 Status: "Successful",
@@ -89,7 +90,6 @@ throw err
 }
 
 const DELETE_COMMENT = async (req,res) => {
-console.log(req.body)
 try {
 const findRemoveComment = await USER.findOneAndUpdate({"Post._id": req.body.postId}, {
 $pull: {"Post.$.comments": {"_id": req.body.commentId}}
@@ -107,11 +107,16 @@ throw err
 
 }
 
+const UPLOAD_FILE = (req,res) => {
+console.log(req.file)
+}
+
 module.exports = {
 ADD_POST,
 UPDATE_LIKES,
 ADD_COMMENT,
 DELETE_COMMENT,
 DELETE_POST,
-DECREASE_LIKES
+DECREASE_LIKES,
+UPLOAD_FILE
 }
