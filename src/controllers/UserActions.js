@@ -78,7 +78,7 @@ belongsTo: req.body.id,
 name: req.body.name,
 text: req.body.comment
 }}
-})
+},{new: true})
 
 res.json({
 Status: "Successful",
@@ -93,7 +93,7 @@ const DELETE_COMMENT = async (req,res) => {
 try {
 const findRemoveComment = await USER.findOneAndUpdate({"Post._id": req.body.postId}, {
 $pull: {"Post.$.comments": {"_id": req.body.commentId}}
-});
+},{new: true});
 
 res.json({
 Status: "Successful",
