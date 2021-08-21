@@ -15,6 +15,8 @@ required: true
 },
 Post: [
 {
+postImg: String || Number,
+cloudinaryId: String || Number,
 belongsTo: String || Number,
 id: String,
 text: String,
